@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:Hummingbird_iOS}/Todos",
+            "name": "Debug Todos (Todos)",
+            "program": "${workspaceFolder:Hummingbird_iOS}/Todos/.build/debug/Todos",
+            "preLaunchTask": "swift: Build Debug Todos (Todos)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:Hummingbird_iOS}/Todos",
+            "name": "Release Todos (Todos)",
+            "program": "${workspaceFolder:Hummingbird_iOS}/Todos/.build/release/Todos",
+            "preLaunchTask": "swift: Build Release Todos (Todos)"
+        }
+    ]
+}
