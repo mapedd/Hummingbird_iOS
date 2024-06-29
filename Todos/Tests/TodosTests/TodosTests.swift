@@ -2,7 +2,7 @@ import Testing
 import Hummingbird
 import Foundation
 import HummingbirdTesting
-@testable import Todos
+@testable import TodosCore
 import Logging
 
 struct Todos {

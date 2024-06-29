@@ -1,10 +1,9 @@
 import Hummingbird
 import Foundation
 
-struct TodoController<Repository: TodoRepository> : Sendable {
+public struct TodoController<Repository: TodoRepository> : Sendable {
   // Todo repository
   let repository: Repository
-  
   
   // add Todos API to router group
   func addRoutes(to group: RouterGroup<some RequestContext>) {
@@ -18,19 +17,19 @@ struct TodoController<Repository: TodoRepository> : Sendable {
   }
   
   /// Delete all todos endpoint
-  func deleteAll(request: Request, context: some RequestContext) async throws -> HTTPResponse.Status {
+  @Sendable func deleteAll(request: Request, context: some RequestContext) async throws -> HTTPResponse.Status {
     try await self.repository.deleteAll()
     return .ok
   }
   
   /// Get todo endpoint
-  func get(request: Request, context: some RequestContext) async throws -> Todo? {
+  @Sendable func get(request: Request, context: some RequestContext) async throws -> Todo? {
     let id = try context.parameters.require("id", as: UUID.self)
     return try await self.repository.get(id: id)
   }
   
   /// Delete todo endpoint
-  func delete(request: Request, context: some RequestContext) async throws -> HTTPResponse.Status {
+  @Sendable func delete(request: Request, context: some RequestContext) async throws -> HTTPResponse.Status {
     let id = try context.parameters.require("id", as: UUID.self)
     if try await self.repository.delete(id: id) {
       return .ok
@@ -39,13 +38,13 @@ struct TodoController<Repository: TodoRepository> : Sendable {
     }
   }
   
-  struct UpdateRequest: Decodable {
+  struct UpdateRequest: Decodable, Sendable {
     let title: String?
     let order: Int?
     let completed: Bool?
   }
   /// Update todo endpoint
-  func update(request: Request, context: some RequestContext) async throws -> Todo? {
+  @Sendable func update(request: Request, context: some RequestContext) async throws -> Todo? {
     let id = try context.parameters.require("id", as: UUID.self)
     let request = try await request.decode(as: UpdateRequest.self, context: context)
     guard let todo = try await self.repository.update(
@@ -60,17 +59,34 @@ struct TodoController<Repository: TodoRepository> : Sendable {
   }
   
   /// Get list of todos endpoint
-  func list(request: Request, context: some RequestContext) async throws -> [Todo] {
+  @Sendable func list(request: Request, context: some RequestContext) async throws -> [Todo] {
     return try await self.repository.list()
   }
   
-  struct CreateRequest: Decodable {
-    let title: String
-    let order: Int?
-  }
+  
   /// Create todo endpoint
-  func create(request: Request, context: some RequestContext) async throws -> Todo {
+  @Sendable func create(
+    request: Request,
+    context: some RequestContext
+  ) async throws -> Todo {
     let request = try await request.decode(as: CreateRequest.self, context: context)
-    return try await self.repository.create(title: request.title, order: request.order, urlPrefix: "http://localhost:8080/todos/")
+    return try await self.repository.create(
+      title: request.title,
+      order: request.order,
+      urlPrefix: "http://localhost:8080/todos/"
+    )
   }
+}
+
+public struct CreateRequest: Codable, Sendable {
+  public init(
+    title: String,
+    order: Int? = nil
+  ) {
+    self.title = title
+    self.order = order
+  }
+  
+  public let title: String
+  public let order: Int?
 }

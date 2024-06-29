@@ -23,6 +23,54 @@
             "name": "Release Todos (Todos)",
             "program": "${workspaceFolder:Hummingbird_iOS}/Todos/.build/release/Todos",
             "preLaunchTask": "swift: Build Release Todos (Todos)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:Hummingbird_iOS}/Todos",
+            "name": "Debug TodosTester (Todos)",
+            "program": "${workspaceFolder:Hummingbird_iOS}/Todos/.build/debug/TodosTester",
+            "preLaunchTask": "swift: Build Debug TodosTester (Todos)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:Hummingbird_iOS}/Todos",
+            "name": "Release TodosTester (Todos)",
+            "program": "${workspaceFolder:Hummingbird_iOS}/Todos/.build/release/TodosTester",
+            "preLaunchTask": "swift: Build Release TodosTester (Todos)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:Hummingbird_iOS}/Todos",
+            "name": "Debug TodosServer (Todos)",
+            "program": "${workspaceFolder:Hummingbird_iOS}/Todos/.build/debug/TodosServer",
+            "preLaunchTask": "swift: Build Debug TodosServer (Todos)"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "args": [],
+            "cwd": "${workspaceFolder:Hummingbird_iOS}/Todos",
+            "name": "Release TodosServer (Todos)",
+            "program": "${workspaceFolder:Hummingbird_iOS}/Todos/.build/release/TodosServer",
+            "preLaunchTask": "swift: Build Release TodosServer (Todos)"
         }
     ]
 }

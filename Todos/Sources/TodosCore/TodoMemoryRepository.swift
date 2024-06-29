@@ -4,17 +4,21 @@ import Foundation
 actor TodoMemoryRepository: TodoRepository {
   var todos: [UUID: Todo]
   
-  
   init() {
     self.todos = [:]
   }
-  
   
   /// Create todo.
   func create(title: String, order: Int?, urlPrefix: String) async throws -> Todo {
     let id = UUID()
     let url = urlPrefix + id.uuidString
-    let todo = Todo(id: id, title: title, order: order, url: url, completed: false)
+    let todo = Todo(
+      id: id,
+      title: title,
+      order: order,
+      url: url,
+      completed: false
+    )
     self.todos[id] = todo
     return todo
   }
